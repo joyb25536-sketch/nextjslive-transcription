@@ -1,29 +1,9 @@
 {
-  "name": "medhelp-insurance",
+  "name": "medhelp",
   "version": "1.0.0",
-  "type": "module",
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
-  },
   "dependencies": {
     "next": "14.2.5",
     "react": "18.3.1",
-    "react-dom": "18.3.1",
-    "@supabase/supabase-js": "2.43.4",
-    "zod": "3.23.8",
-    "date-fns": "3.6.0",
-    "date-fns-tz": "3.1.3",
-    "react-big-calendar": "1.13.1",
-    "react-calendar": "5.0.0",
-    "nodemailer": "6.9.13",
-    "twilio": "5.0.4",
-    "lucide-react": "0.395.0",
-    "framer-motion": "11.2.10",
-    "tailwindcss": "3.4.4",
-    "postcss": "8.4.38",
-    "autoprefixer": "10.4.19"
+    "react-dom": "18.3.1"
   }
 }
