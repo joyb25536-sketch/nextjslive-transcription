@@ -22,11 +22,22 @@ export function LocationCalendar() {
     async function loadEvents() {
       try {
         const res = await fetch('/api/location-events');
-        if (!res.ok) throw new Error('Failed to fetch');
+        if (!res.ok) {
+          console.warn('⚠ Failed to fetch location events (status:', res.status + ')');
+          setEvents([]);
+          setError(null);
+          return;
+        }
         const json = await res.json();
-        setEvents(json.events || []);
+        const eventsData = Array.isArray(json.events) ? json.events : [];
+        setEvents(eventsData);
+        if (eventsData.length === 0) {
+          console.info('No location events configured yet');
+        }
       } catch (err) {
-        setError('Failed to load calendar events');
+        console.error('✗ Error loading calendar events:', err);
+        setEvents([]);
+        setError(null);
       } finally {
         setLoading(false);
       }
@@ -35,8 +46,8 @@ export function LocationCalendar() {
     loadEvents();
   }, []);
 
-  if (loading) return <div>Loading calendar...</div>;
-  if (error) return <div className="text-red-300">{error}</div>;
+  if (loading) return <div className="text-slate-300 text-center py-8">Loading calendar...</div>;
+  if (error) return <div className="text-slate-400 text-center py-8">Calendar temporarily unavailable</div>;
 
   const buildDateMap = events.reduce((acc, event) => {
     if (!event.event_date) return acc;

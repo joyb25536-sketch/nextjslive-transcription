@@ -4,14 +4,14 @@ import { useEffect, useState } from 'react';
 import { Trash2 } from 'lucide-react';
 
 interface Appointment {
-  id: number;
+  id: string;
   name: string;
   email: string;
   phone: string;
   service_type: string;
   date: string;
   time: string;
-  timezone: string;
+  timezone?: string;
   appointment_utc?: string;
   notes?: string;
   created_at?: string;
@@ -27,13 +27,17 @@ export default function AdminAppointmentsPage() {
 
   const loadAppointments = async () => {
     try {
-      const res = await fetch('/api/appointments/availability');
+      const res = await fetch('/api/appointments');
       if (res.ok) {
-        const { appointments } = await res.json();
-        setAppointments(appointments || []);
+        const data = await res.json();
+        setAppointments(data.appointments || []);
+      } else {
+        console.warn('Failed to load appointments:', res.status);
+        setAppointments([]);
       }
     } catch (err) {
       console.error('Failed to load appointments:', err);
+      setAppointments([]);
     } finally {
       setLoading(false);
     }

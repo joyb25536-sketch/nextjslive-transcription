@@ -1,3 +1,6 @@
+import { NextRequest, NextResponse } from 'next/server';
+import { getLocationEvents, addLocationEvent } from '../../../lib/database';
+
 export async function GET() {
   try {
     const events = await getLocationEvents();
