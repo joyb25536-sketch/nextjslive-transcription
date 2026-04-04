@@ -25,7 +25,7 @@ export function ContactSection() {
         <div className="glass p-6 space-y-4">
           <p>Reach us via phone, email, or form request. Our team responds within 1 business day.</p>
           <p><strong>Phone:</strong> <a href="tel:+15165474146" className="text-medhelp-700">+1 (516) 547-4146</a></p>
-          <p><strong>Email:</strong> <a href="mailto:Paola929medhelp@gmail.com" className="text-medhelp-700">hello@medhelp.com</a></p>
+          <p><strong>Email:</strong> <a href="mailto:Paola929medhelp@gmail.com" className="text-medhelp-700">Paola929medhelp@gmail.com</a></p>
           <p><strong>Office:</strong> 📍 Long Island, NY</p>
         </div>
 

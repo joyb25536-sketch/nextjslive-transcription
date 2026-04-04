@@ -47,6 +47,24 @@ export async function POST(req: NextRequest) {
 
   const saved = await addAppointment(appointmentPayload);
 
+  // Send email notification to consultant
+  try {
+    await fetch(`${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/api/send-email`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name: saved.name,
+        email: saved.email,
+        phone: saved.phone,
+        date: saved.date,
+        time: saved.time,
+      }),
+    });
+  } catch (emailError) {
+    console.error('Failed to send consultant email:', emailError);
+    // Don't fail the booking if email fails
+  }
+
   // Notification delivery (best-effort)
   const userSubject = `MedHelp Booking Confirmed: ${saved.service_type || saved.serviceType}`;
   const userBody = `Hi ${saved.name},\n\nYour appointment is confirmed for ${saved.date} at ${saved.time} (${timezone}).\n\nSee you soon!`; 
