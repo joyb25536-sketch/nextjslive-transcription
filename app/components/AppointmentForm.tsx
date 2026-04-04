@@ -147,8 +147,27 @@ export function AppointmentForm() {
     }
 
     const data = await nextRes.json();
-    setStatus({ type: 'success', message: `Appointment confirmed for ${data.appointment.date} at ${data.appointment.time} (${timezone}).` });
 
+    const emailRes = await fetch('/api/send-email', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name: form.name,
+        email: form.email,
+        phone: form.phone,
+        date: form.date,
+        time: form.time,
+      }),
+    });
+
+    if (!emailRes.ok) {
+      const emailErrorData = await emailRes.json().catch(() => null);
+      console.error('Email notification failed:', emailErrorData || emailRes.statusText);
+      setStatus({ type: 'error', message: 'Booking saved, but email notification failed.' });
+      return;
+    }
+
+    setStatus({ type: 'success', message: `Appointment confirmed for ${data.appointment.date} at ${data.appointment.time} (${timezone}).` });
     setBookedAppointments(prev => [...prev, { ...form, timezone, appointment_utc: data.appointment?.appointment_utc }]);
     setForm({ name: '', email: '', phone: '', serviceType: serviceTypes[0], notes: '', date: '', time: '' });
   };
