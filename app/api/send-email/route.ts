@@ -12,7 +12,7 @@ export async function POST(request: Request) {
 
     const { data, error } = await resend.emails.send({
       from: 'MedHelp Alerts <onboarding@resend.dev>',
-      to: ['joyb25536@gmail.com'],
+      to: ['Paola929medhelp@gmail.com'],
       subject: `New Appointment: ${name}`,
       text: `
         You have a new booking request!
