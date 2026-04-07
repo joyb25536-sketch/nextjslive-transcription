@@ -1,12 +1,12 @@
-import { Navbar } from './components/Navbar';
-import { Services } from './components/Services';
-import { AppointmentForm } from './components/AppointmentForm';
-import { LocationMap } from './components/LocationMap';
-import { LocationCalendar } from './components/LocationCalendar';
-import { AboutSection } from './components/AboutSection';
-import { JoinTeam } from './components/JoinTeam';
-import { ContactSection } from './components/ContactSection';
-import { Footer } from './components/Footer';
+// import { Navbar } from './components/Navbar';
+// import { Services } from './components/Services';
+// import { AppointmentForm } from './components/AppointmentForm';
+// import { LocationMap } from './components/LocationMap';
+// import { LocationCalendar } from './components/LocationCalendar';
+// import { AboutSection } from './components/AboutSection';
+// import { JoinTeam } from './components/JoinTeam';
+// import { ContactSection } from './components/ContactSection';
+// import { Footer } from './components/Footer';
 import { Suspense } from 'react';
 
 export default function Home() {
